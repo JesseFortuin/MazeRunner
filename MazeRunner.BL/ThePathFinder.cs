@@ -4,54 +4,66 @@
     {
         public string MazeRunner(int[,] maze, string[] directions)
         {
-            int row = 0;
-
-            int column = 0;
-
-
-            for (int i = 0; i < maze.GetLength(0); i++)
+            try
             {
-                for (int j = 0; j < maze.GetLength(1); j++)
+                int row = 0;
+
+                int column = 0;
+
+
+                for (int i = 0; i < maze.GetLength(0); i++)
                 {
-                    if (maze[i, j] == 2)
+                    for (int j = 0; j < maze.GetLength(1); j++)
                     {
-                        row = i;
+                        if (maze[i, j] == 2)
+                        {
+                            row = i;
 
-                        column = j;
+                            column = j;
 
-                        break;
+                            break;
+                        }
                     }
                 }
+
+                foreach (string direction in directions)
+                {
+                    switch (direction)
+                    {
+                        case "N":
+                            row -= 1;
+                            break;
+
+                        case "S":
+                            row += 1;
+                            break;
+
+                        case "W":
+                            column -= 1;
+                            break;
+
+                        case "E":
+                            column += 1;
+                            break;
+                    }
+
+                    if (maze[row, column] == 1)
+                    {
+                        return "Dead";
+                    }
+
+                    if (maze[row, column] == 3)
+                    {
+                        return "Finish";
+                    }
+                }
+                return "Lost";
             }
 
-            foreach (string direction in directions)
+            catch
             {
-                switch (direction)
-                {
-                    case "N": row -= 1;
-                        break;
-
-                    case "S": row += 1;
-                        break;
-
-                    case "W": column -= 1;
-                        break;
-
-                    case "E": column += 1;
-                        break;
-                }
-
-                if (maze[row,column] == 1)
-                {
-                    return "Dead";
-                }
-
-                if (maze[row,column] == 3)
-                {
-                    return "Finish";
-                }
+                return "Dead";
             }
-            return "Lost";
         }
     }
 }
