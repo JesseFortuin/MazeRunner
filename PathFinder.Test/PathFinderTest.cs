@@ -53,12 +53,40 @@ namespace PathFinder.Test
             var directionInput = new string[] { "N", "N", "N", "N", "N", "E", "E", "E", "E", "W", "E", "S", "N", "E" };
 
             string expected = "Finish";
+
             //act
-
-
-
+            string actual = finder.MazeRunner(mapInput, directionInput);
 
             //assert
+            Assert.Equal(expected , actual);
+        }
+
+        [Fact]
+        public void MazeRunnerNewStartingPoint()
+        {
+            //arrange
+            IPathFinder finder = new ThePathFinder();
+
+            var mapInput = new int[,]
+            {
+                {1,1,1,1,1,1,1},
+                {1,0,0,0,0,0,3},
+                {1,0,1,0,1,0,1},
+                {0,0,1,0,0,0,1},
+                {1,0,1,0,1,0,1},
+                {2,0,0,0,0,0,1},
+                {1,1,1,0,1,0,1}
+            };
+
+            var directionInput = new string[] { "E", "N", "N", "N", "N", "E", "E", "E", "E", "E" };
+
+            string expected = "Finish";
+
+            //act
+            string actual = finder.MazeRunner(mapInput, directionInput);
+
+            //assert
+            Assert.Equal(expected , actual);
         }
 
         [Fact]
@@ -81,12 +109,12 @@ namespace PathFinder.Test
             var directionInput = new string[] { "N", "N", "N", "N", "N", "N" };
 
             string expected = "Dead";
+
             //act
-
-
-
+            string actual = finder.MazeRunner(mapInput, directionInput);
 
             //assert
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -109,12 +137,12 @@ namespace PathFinder.Test
             var directionInput = new string[] { "N", "N", "N", "N", "N", "E", "E", "E", "E" };
 
             string expected = "Lost";
+
             //act
-
-
-
+            string actual = finder.MazeRunner(mapInput, directionInput);
 
             //assert
+            Assert.Equal(expected, actual);
         }
     }
 }
