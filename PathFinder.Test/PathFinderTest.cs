@@ -32,6 +32,35 @@ namespace PathFinder.Test
             //assert
             Assert.Equal(expected, actual);
         }
+        
+        [Fact]
+        public void MazeRunnerOutOfBounds()
+        {
+            //arrange
+            IPathFinder finder = new ThePathFinder();
+
+            var mapInput = new int[,]
+            {
+                {1,1,1,1,1,1,1},
+                {1,0,0,0,0,0,3},
+                {1,0,1,0,1,0,1},
+                {0,0,1,0,0,0,1},
+                {1,0,1,0,1,0,1},
+                {1,0,0,0,0,0,1},
+                {1,2,1,0,1,0,1}
+            };
+
+            var directionInput = new string[] { "N","E", "E", "S", "S"};
+
+            string expected = "Dead";
+            //act
+
+            string actual = finder.MazeRunner(mapInput, directionInput);
+
+
+            //assert
+            Assert.Equal(expected, actual);
+        }
 
         [Fact]
         public void MazeRunnerSuccessTest2()

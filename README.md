@@ -31,3 +31,18 @@ Rules
 
 6. If you find yourself still in the maze after using all the moves, you should return Lost.
 Good luck, and stay safe!
+
+
+---------------------------------------------------------------
+solutions
+
+
+int i = 0, j = 0, n = maze.GetLength(0);
+            for (; maze[i, j] != 2; j = ++j % n, i = j > 0 ? i : ++i % n) ;
+            foreach (var item in directions.Select(act => (i += ("WNES".IndexOf(act) - 2) % 2, j += ("WNES".IndexOf(act) - 1) % 2)))
+                if (i < 0 || j < 0 || i >= n || j >= n || maze[i, j] == 1) return "Dead";
+                else if (maze[i, j] == 3) return "Finish";
+            return "Lost";
+
+----------------
+
